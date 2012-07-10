@@ -1,7 +1,6 @@
-require "dm-searcher/version"
+require 'dm-searcher/version'
+require 'dm-searcher/searcher'
 
-module Dm
-  module Searcher
-    # Your code goes here...
-  end
+# DataMapper plugin providing for searching models with nested conditions.
+module DataMapper
 end
