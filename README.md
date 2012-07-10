@@ -1,6 +1,6 @@
-# Dm::Searcher
+# DataMapper::Searcher
 
-TODO: Write a gem description
+DataMapper plugin providing for searching models with nested conditions.
 
 ## Installation
 
@@ -18,7 +18,52 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+ # Models
+ class User
+   include DataMapper::Resource
+   include DataMapper::Searcher
+
+   property :id, Serial
+   property :name, String
+
+   has n, :roles
+ end
+
+ class Role
+   include DataMapper::Resource
+   include DataMapper::Searcher
+
+   property :id, Serial
+   property :name, String
+
+   belongs_to :user
+ end
+
+ # Search for records
+ User.search('name.like' => '%Tower%')
+ # => Returns the users whose name contains 'Tower'.
+
+ User.search('id.gt' => 10)
+ # => Returns the users whose id is greater than 10.
+
+ User.search('roles.name' => 'Administrators')
+ # => Returns the users whose role is 'Administrator'.
+
+ User.search('name.like' => '%Tower%',
+             'id.gt' => 10,
+             'roles.name' => 'Administrators') 
+ # => Returns the users whose name contains 'Tower', id is greater than 10 and role is 'Administrators'.
+
+ # Combining the result
+ User.search('name.like' => '%Tower%') + User.search('id.gt' => 10)
+ User.search('name.like' => '%Tower%') | User.search('id.gt' => 10)
+ # => Returns the users whose name contains 'Tower' or id is greater than 10.
+
+ User.search('name.like' => '%Tower%') & User.search('id.gt' => 10)
+ User.search('name.like' => '%Tower%') - User.search('id.gt' => 10)
+ # => Returns the users whose name contains 'Tower' and id is greater than 10.
+```
 
 ## Contributing
 
