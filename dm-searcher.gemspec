@@ -15,5 +15,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Dm::Searcher::VERSION
 
-  gem.add_runtime_dependency 'data_mapper', '~> 1.2.0'
+  gem.add_runtime_dependency 'data_mapper', '>= 1.2.0'
 end
