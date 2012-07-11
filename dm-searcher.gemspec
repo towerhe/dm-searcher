@@ -16,4 +16,8 @@ Gem::Specification.new do |gem|
   gem.version       = Dm::Searcher::VERSION
 
   gem.add_runtime_dependency 'data_mapper', '>= 1.2.0'
+  %w(core aggregates constraints migrations transactions serializer timestamps
+     validations types).each do |name|
+    gem.add_runtime_dependency "dm-#{name}", '>= 1.2.0'
+  end
 end
