@@ -73,7 +73,7 @@ module DataMapper
         options = {}
 
         opts.keys.each do |k|
-          key = parse_key(model, k)
+          key = k.is_a?(DataMapper::Query::Operator) ? k : parse_key(model, k)
 
           options[key] = opts[k] if key && !opts[k].blank?
         end
