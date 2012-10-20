@@ -62,7 +62,7 @@ module DataMapper
       #
       # @return [DataMapper::Collection] Matched records
       def search(opts = {})
-        options = parse_opts(self, opts)
+        options = parse_opts(self, opts || {})
 
         self.all(options)
       end
